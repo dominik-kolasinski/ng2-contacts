@@ -1,0 +1,23 @@
+{"0":{
+  "category": "retail",
+  "city":"Warsaw",
+  "company":"NonameC",
+  "description":"Fruitcake wafer sugar plum. Biscuit dessert candy bear claw chocolate cake sesame snaps.",
+  "email":"nonamec@warsaw.com",
+  "phone":"+48 22 123 4567",
+  "street_address":"Warszawska 11",
+  "years_in_business":"10",
+  "zipcode":"02222"
+  },
+  "1":{
+    "category": "retail",
+    "city":"Cracow",
+    "company":"FastCompany",
+    "description":"Fruitcake wafer sugar plum. Biscuit dessert candy bear claw chocolate cake sesame snaps.",
+    "email":"fas@cracow.com",
+    "phone":"+48 34 123 4567",
+    "street_address":"Krakowska 22",
+    "years_in_business":"2",
+    "zipcode":"03444"
+  }
+}

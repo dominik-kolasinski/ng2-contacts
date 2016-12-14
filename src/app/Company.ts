@@ -1,9 +1,9 @@
-export interface Business{
+export interface Company{
   $key?:string;
   company?:string;
   description?:string;
   category:string;
-  years_in_business?:number;
+  years_active?:number;
   street_address?:string;
   city:string;
   zipcode?:string;

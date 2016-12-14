@@ -6,7 +6,7 @@
   "email":"nonamec@warsaw.com",
   "phone":"+48 22 123 4567",
   "street_address":"Warszawska 11",
-  "years_in_business":"10",
+  "years_active":"10",
   "zipcode":"02222"
   },
   "1":{
@@ -17,7 +17,7 @@
     "email":"fas@cracow.com",
     "phone":"+48 34 123 4567",
     "street_address":"Krakowska 22",
-    "years_in_business":"2",
+    "years_active":"2",
     "zipcode":"03444"
   }
 }

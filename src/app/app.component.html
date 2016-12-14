@@ -27,7 +27,90 @@
 </div>
 
 <div *ngIf="appState == 'add'">
-  <div class="">Add</div>
+  <div class="row">
+    <div class="large-12 columns">
+      <h3>Add company</h3>
+      <form (submit)="addBusiness(company.value,
+        category.value,
+        years_in_business.value,
+        description.value,
+        phone.value,
+        email.value,
+        street_address.value,
+        city.value,
+        zipcode.value)">
+        <div class="row">
+          <div class="6-large columns">
+            <label>Company
+              <input type="text" placeholder="Company name" #company>
+            </label>
+          </div>
+          <div class="6-large columns">
+            <label>Category
+              <select #category>
+                <option value="0">Select</option>
+                <option *ngFor="let category of categories" value="{{category.name}}">{{category.name}}</option>
+              </select>
+            </label>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="medium-2 columns">
+            <label>Years active
+              <input type="text" placeholder="Years active" #years_in_business>
+            </label>
+          </div>
+          <div class="medium-6 columns">
+            <label>Description
+              <textarea #description></textarea>
+            </label>
+          </div>
+          <div class="medium-4 columns"></div>
+        </div>
+
+        <div class="row">
+          <div class="medium-2 columns">
+            <label>Phone:
+              <input type="text" placeholder="phone number" #phone>
+            </label>
+          </div>
+          <div class="medium-4 columns">
+            <label>Email:
+              <input type="text" placeholder="email" #email>
+            </label>
+          </div>
+          <div class="medium-6 columns"></div>
+        </div>
+
+        <div class="row">
+          <div class="medium-3 columns">
+            <label>Address:
+              <input type="text" placeholder="address" #street_address>
+            </label>
+          </div>
+          <div class="medium-2 columns">
+            <label>City:
+              <input type="text" placeholder="city" #city>
+            </label>
+          </div>
+          <div class="medium-1 columns">
+            <label>Zipcode:
+              <input type="text" placeholder="zipcode" #zipcode>
+            </label>
+          </div>
+          <div class="medium-6 columns"></div>
+        </div>
+
+        <div class="row">
+          <div class="medium-12 columns">
+            <input type="submit" class="button">
+          </div>
+        </div>
+
+      </form>
+    </div>
+  </div>
 </div>
 
 <div *ngIf="appState == 'extend'">
@@ -43,7 +126,7 @@
         <div class="large-5 columns large-offset-1">
           <h3>{{business.company}}</h3>
           <p>Category: {{business.category}}</p>
-          <p>Years In Business: {{business.years_in_business}}</p>
+          <p>Years In Business: {{business.years_active}}</p>
           <p>{{business.description}}</p>
         </div>
         <div class="large-5 columns large-offset-1">
@@ -52,7 +135,7 @@
             <li>email: {{business.email}}</li>
             <li>phone: {{business.phone}}</li>
             <li>address {{business.street_address}}</li>
-            <li>years active: {{business.years_in_business}}</li>
+            <li>years active: {{business.years_active}}</li>
             <li>zipcode: {{business.zipcode}}</li>
           </ul>
         </div>
@@ -79,8 +162,8 @@
             <td>{{business.category}}</td>
             <td>{{business.phone}}</td>
             <td>
-              <button class="button" (click)="changeState('extend', business.$key)">More</button>
-              <button class="button secondary">Edit</button>
+              <button (click)="changeState('extend', business.$key)" class="button">More</button>
+              <button (click)="showEdit(business)" class="button secondary">Edit</button>
               <button class="button alert">Delete</button>
             </td>
           </tr>

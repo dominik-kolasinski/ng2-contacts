@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {FirebaseService} from './services/firebase.service';
-import {Business} from './Business';
+import {Company} from './Company';
 import {Category} from './Category';
 
 @Component({
@@ -10,7 +10,7 @@ import {Category} from './Category';
   providers:[FirebaseService]
 })
 export class AppComponent implements OnInit{
-  private businesses:Business[];
+  private company:Company[];
   private categories:Category[];
   appState: string;
   activeKey: string;
@@ -21,7 +21,7 @@ export class AppComponent implements OnInit{
 
   ngOnInit(){
     this._firebaseService.getBusinesses().subscribe(businesses => {
-        this.businesses = businesses;
+        this.company = businesses;
       });
 
     this._firebaseService.getCategories().subscribe(categories => {
@@ -40,7 +40,38 @@ export class AppComponent implements OnInit{
 
   filterCategory(category){
     this._firebaseService.getBusinesses(category).subscribe(businesses => {
-      this.businesses = businesses;
+      this.company = businesses;
     });
+  }
+
+  addBusiness(
+    company:string,
+    category:string,
+    years_active:number,
+    description:string,
+    phone:string,
+    email:string,
+    street_address:string,
+    city:string,
+    zipcode:string){
+      var created_at = new Date().toString();
+
+      var newBusiness = {
+        company: company,
+        category: category,
+        years_active: years_active,
+        description: description,
+        phone: phone,
+        email: email,
+        street_address: street_address,
+        city: city,
+        zipcode: zipcode,
+        created_at: created_at
+      }
+
+      console.log(newBusiness);
+
+      this._firebaseService.addBusiness(newBusiness);
+      // this.changeState('default');
   }
 }

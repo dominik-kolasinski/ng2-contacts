@@ -10,18 +10,28 @@ import {Category} from './Category';
   providers:[FirebaseService]
 })
 export class AppComponent implements OnInit{
-  private company:Company[];
+  private companies:Company[];
   private categories:Category[];
   appState: string;
   activeKey: string;
+
+  activeCompany:string;
+  activeCategory:string;
+  activeYearsActive:string;
+  activeDescription:string;
+  activePhone:string;
+  activeMail:string;
+  activeStreetAddress:string;
+  activeCity:string;
+  activeZipcode:string;
 
   constructor(private _firebaseService:FirebaseService){
 
   }
 
   ngOnInit(){
-    this._firebaseService.getBusinesses().subscribe(businesses => {
-        this.company = businesses;
+    this._firebaseService.getCompanies().subscribe(companies => {
+        this.companies = companies;
       });
 
     this._firebaseService.getCategories().subscribe(categories => {
@@ -39,12 +49,12 @@ export class AppComponent implements OnInit{
   }
 
   filterCategory(category){
-    this._firebaseService.getBusinesses(category).subscribe(businesses => {
-      this.company = businesses;
+    this._firebaseService.getCompanies(category).subscribe(companies => {
+      this.companies = companies;
     });
   }
 
-  addBusiness(
+  addCompany(
     company:string,
     category:string,
     years_active:number,
@@ -56,7 +66,7 @@ export class AppComponent implements OnInit{
     zipcode:string){
       var created_at = new Date().toString();
 
-      var newBusiness = {
+      var newCompany = {
         company: company,
         category: category,
         years_active: years_active,
@@ -69,9 +79,39 @@ export class AppComponent implements OnInit{
         created_at: created_at
       }
 
-      console.log(newBusiness);
+      console.log(newCompany);
 
-      this._firebaseService.addBusiness(newBusiness);
-      // this.changeState('default');
+      this._firebaseService.addCompany(newCompany);
+      //this.changeState('default');
+  }
+
+  showEdit(company){
+    this.changeState('edit',company.$key);
+    this.activeCompany = company.company;
+    this.activeCategory = company.category;
+    this.activeYearsActive = company.years_active;
+    this.activeDescription = company.description;
+    this.activePhone = company.phone;
+    this.activeMail = company.email;
+    this.activeStreetAddress = company.street_address;
+    this.activeCity = company.city;
+    this.activeZipcode = company.zipcode;
+  }
+
+  updateCompany(){
+    var updatedCompany = {
+      company: this.activeCompany,
+      category: this.activeCategory,
+      years_active: this.activeYearsActive,
+      description: this.activeDescription,
+      phone: this.activePhone,
+      email: this.activeMail,
+      street_address: this.activeStreetAddress,
+      city: this.activeCity,
+      zipcode: this.activeZipcode
+    }
+
+    this._firebaseService.updateCompany(this.activeKey, updatedCompany);
+    this.changeState('default', this.activeKey);
   }
 }

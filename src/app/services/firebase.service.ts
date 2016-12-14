@@ -13,7 +13,7 @@ export class FirebaseService{
 
   }
 
-  getBusinesses(category:string = null){
+  getCompanies(category:string = null){
     if(category != null){
       this.companies = this._af.database.list('/companies', {
         query: {
@@ -36,7 +36,11 @@ export class FirebaseService{
     return this.categories;
   }
 
-  addBusiness(newBusiness){
-    return this.companies.push(newBusiness);
+  addCompany(newCompany){
+    return this.companies.push(newCompany);
+  }
+
+  updateCompany(companyKey, updatedCompany){
+    return this.companies.update(companyKey, updatedCompany);
   }
 }

@@ -26,13 +26,14 @@
   </div>
 </div>
 
+<!-- form for adding new company -->
 <div *ngIf="appState == 'add'">
   <div class="row">
     <div class="large-12 columns">
       <h3>Add company</h3>
-      <form (submit)="addBusiness(company.value,
+      <form (submit)="addCompany(company.value,
         category.value,
-        years_in_business.value,
+        years_active.value,
         description.value,
         phone.value,
         email.value,
@@ -58,7 +59,7 @@
         <div class="row">
           <div class="medium-2 columns">
             <label>Years active
-              <input type="text" placeholder="Years active" #years_in_business>
+              <input type="text" placeholder="Years active" #years_active>
             </label>
           </div>
           <div class="medium-6 columns">
@@ -107,6 +108,85 @@
             <input type="submit" class="button">
           </div>
         </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- form for editing existing company-->
+<div *ngIf="appState == 'edit'">
+  <div class="row">
+    <div class="large-12 columns">
+      <h3>Edit company</h3>
+      <form (submit)="updateCompany()">
+        <div class="row">
+          <div class="6-large columns">
+            <label>Company
+              <input type="text" [(ngModel)]="activeCompany" name="activeCompany" placeholder="Company name" #company>
+            </label>
+          </div>
+          <div class="6-large columns">
+            <label>Category
+              <select  [(ngModel)]="activeCategory" name="activeCategory" #category>
+                <option value="0">Select</option>
+                <option *ngFor="let category of categories" value="{{category.name}}">{{category.name}}</option>
+              </select>
+            </label>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="medium-2 columns">
+            <label>Years active
+              <input type="text" [(ngModel)]="activeYearsActive" name="activeyearsActive" placeholder="Years active" #years_active>
+            </label>
+          </div>
+          <div class="medium-6 columns">
+            <label>Description
+              <textarea [(ngModel)]="activeDescription" name="activeDescription" #description></textarea>
+            </label>
+          </div>
+          <div class="medium-4 columns"></div>
+        </div>
+
+        <div class="row">
+          <div class="medium-2 columns">
+            <label>Phone:
+              <input type="text" [(ngModel)]="activePhone" name="activePhone" placeholder="phone number" #phone>
+            </label>
+          </div>
+          <div class="medium-4 columns">
+            <label>Email:
+              <input type="text" [(ngModel)]="activeMail" name="activeMail" placeholder="email" #email>
+            </label>
+          </div>
+          <div class="medium-6 columns"></div>
+        </div>
+
+        <div class="row">
+          <div class="medium-3 columns">
+            <label>Address:
+              <input type="text" [(ngModel)]="activeStreetAddress" name="activeStreetAddress" placeholder="address" #street_address>
+            </label>
+          </div>
+          <div class="medium-2 columns">
+            <label>City:
+              <input type="text" [(ngModel)]="activeCity" name="activeCity" placeholder="city" #city>
+            </label>
+          </div>
+          <div class="medium-1 columns">
+            <label>Zipcode:
+              <input type="text" [(ngModel)]="activeZipcode" name="activeZipcode" placeholder="zipcode" #zipcode>
+            </label>
+          </div>
+          <div class="medium-6 columns"></div>
+        </div>
+
+        <div class="row">
+          <div class="medium-12 columns">
+            <input type="submit" class="button">
+          </div>
+        </div>
 
       </form>
     </div>
@@ -120,23 +200,23 @@
     </div>
   </div>
 
-  <div *ngFor="let business of businesses">
-    <div *ngIf="business.$key == activeKey">
+  <div *ngFor="let company of companies">
+    <div *ngIf="company.$key == activeKey">
       <div class="row">
         <div class="large-5 columns large-offset-1">
-          <h3>{{business.company}}</h3>
-          <p>Category: {{business.category}}</p>
-          <p>Years In Business: {{business.years_active}}</p>
-          <p>{{business.description}}</p>
+          <h3>{{company.company}}</h3>
+          <p>Category: {{company.category}}</p>
+          <p>Years In Business: {{company.years_active}}</p>
+          <p>{{company.description}}</p>
         </div>
         <div class="large-5 columns large-offset-1">
           <h4>Contact info</h4>
           <ul>
-            <li>email: {{business.email}}</li>
-            <li>phone: {{business.phone}}</li>
-            <li>address {{business.street_address}}</li>
-            <li>years active: {{business.years_active}}</li>
-            <li>zipcode: {{business.zipcode}}</li>
+            <li>email: {{company.email}}</li>
+            <li>phone: {{company.phone}}</li>
+            <li>address {{company.street_address}}</li>
+            <li>years active: {{company.years_active}}</li>
+            <li>zipcode: {{company.zipcode}}</li>
           </ul>
         </div>
       </div>
@@ -146,7 +226,7 @@
 
 <div class="row">
   <div class="large-12 columns">
-    <div *ngIf="businesses">
+    <div *ngIf="companies">
       <table>
         <thead>
           <tr>
@@ -157,13 +237,13 @@
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let business of businesses">
-            <td>{{business.company}}</td>
-            <td>{{business.category}}</td>
-            <td>{{business.phone}}</td>
+          <tr *ngFor="let company of companies">
+            <td>{{company.company}}</td>
+            <td>{{company.category}}</td>
+            <td>{{company.phone}}</td>
             <td>
-              <button (click)="changeState('extend', business.$key)" class="button">More</button>
-              <button (click)="showEdit(business)" class="button secondary">Edit</button>
+              <button (click)="changeState('extend', company.$key)" class="button">More</button>
+              <button (click)="showEdit(company)" class="button secondary">Edit</button>
               <button class="button alert">Delete</button>
             </td>
           </tr>

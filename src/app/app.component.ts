@@ -82,7 +82,7 @@ export class AppComponent implements OnInit{
       console.log(newCompany);
 
       this._firebaseService.addCompany(newCompany);
-      //this.changeState('default');
+      // this.changeState('default');
   }
 
   showEdit(company){
@@ -112,6 +112,11 @@ export class AppComponent implements OnInit{
     }
 
     this._firebaseService.updateCompany(this.activeKey, updatedCompany);
+    this.changeState('default', this.activeKey);
+  }
+
+  deleteCompany(companyKey){
+    this._firebaseService.deleteCompany(companyKey);
     this.changeState('default', this.activeKey);
   }
 }

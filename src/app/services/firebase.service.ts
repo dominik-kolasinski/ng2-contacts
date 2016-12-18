@@ -43,4 +43,8 @@ export class FirebaseService{
   updateCompany(companyKey, updatedCompany){
     return this.companies.update(companyKey, updatedCompany);
   }
+
+  deleteCompany(companyKey){
+    return this.companies.remove(companyKey);
+  }
 }

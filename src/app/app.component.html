@@ -14,7 +14,7 @@
 
 <div class="row">
   <div class="large-6 columns">
-    <button (click)="changeState('add')" class="button">Add Business</button>
+    <button (click)="changeState('add')" class="button">Add Company</button>
   </div>
   <div class="large-6 columns">
     <label>Filter Category
@@ -244,7 +244,7 @@
             <td>
               <button (click)="changeState('extend', company.$key)" class="button">More</button>
               <button (click)="showEdit(company)" class="button secondary">Edit</button>
-              <button class="button alert">Delete</button>
+              <button (click)="deleteCompany(company.$key)" class="button alert">Delete</button>
             </td>
           </tr>
         </tbody>
